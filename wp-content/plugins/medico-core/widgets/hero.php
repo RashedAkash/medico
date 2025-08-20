@@ -1,35 +1,102 @@
 <?php
-namespace ElementorMedico\Widgets;
+namespace MedicoCore\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/**
+ * Medico Core
+ *
+ * Elementor widget for hello world.
+ *
+ * @since 1.0.0
+ */
 class Medico_Hero extends Widget_Base {
 
+	/**
+	 * Retrieve the widget name.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'medico-hero';
 	}
 
+	/**
+	 * Retrieve the widget title.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
-		return __( 'Medico Hero', 'medico' );
+		return __( 'Medico Hero', 'medico-core' );
 	}
 
+	/**
+	 * Retrieve the widget icon.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-posts-ticker';
 	}
 
+	/**
+	 * Retrieve the list of categories the widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * Note that currently Elementor supports only one category.
+	 * When multiple categories passed, Elementor uses the first one.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'medico-widget-category' ];
 	}
 
+	/**
+	 * Retrieve the list of scripts the widget depended on.
+	 *
+	 * Used to set scripts dependencies required to run the widget.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
 	public function get_script_depends() {
-		return [ 'medico' ];
+		return [ 'medico-core' ];
 	}
 
+	/**
+	 * Register the widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access protected
+	 */
 	protected function register_controls() {
-
 		$this->start_controls_section(
 			'section_content',
 			[
@@ -110,15 +177,15 @@ class Medico_Hero extends Widget_Base {
 
 		$this->end_controls_section();
 
-		// Call style controls
-		$this->style_control_section();
-	}
 
-	protected function style_control_section() {
+
+
+
+
 		$this->start_controls_section(
 			'section_style',
 			[
-				'label' => __( 'Style', 'medico' ),
+				'label' => __( 'Style', 'medico-core' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -126,17 +193,17 @@ class Medico_Hero extends Widget_Base {
 		$this->add_control(
 			'text_transform',
 			[
-				'label' => __( 'Text Transform', 'medico' ),
+				'label' => __( 'Text Transform', 'medico-core' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					'' => __( 'None', 'medico' ),
-					'uppercase' => __( 'UPPERCASE', 'medico' ),
-					'lowercase' => __( 'lowercase', 'medico' ),
-					'capitalize' => __( 'Capitalize', 'medico' ),
+					'' => __( 'None', 'medico-core' ),
+					'uppercase' => __( 'UPPERCASE', 'medico-core' ),
+					'lowercase' => __( 'lowercase', 'medico-core' ),
+					'capitalize' => __( 'Capitalize', 'medico-core' ),
 				],
 				'selectors' => [
-					'{{WRAPPER}} .hero h2' => 'text-transform: {{VALUE}};',
+					'{{WRAPPER}} .title' => 'text-transform: {{VALUE}};',
 				],
 			]
 		);
@@ -144,12 +211,20 @@ class Medico_Hero extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render the widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access protected
+	 */
+	protected function render() {
+		$settings = $this->get_settings_for_display();
+		?>
 
-		protected function render() {
-	$settings = $this->get_settings_for_display();
-	?>
-
-	<!-- Hero Section -->
+		<!-- Hero Section -->
 	<section id="hero" class="hero section">
 
 		<div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
@@ -200,31 +275,24 @@ class Medico_Hero extends Widget_Base {
 		</div>
 
 	</section><!-- /Hero Section -->
+		<?php
+	}
 
-	<?php
-}
-
-
+	/**
+	 * Render the widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @access protected
+	 */
 	protected function content_template() {
 		?>
-		<section class="hero section">
-			<div class="carousel slide">
-				<# if ( settings.hero_list ) { #>
-					<# _.each( settings.hero_list, function( item, index ) { #>
-						<div class="carousel-item <# if ( index === 0 ) { #>active<# } #>">
-							<img src="{{ item.image.url }}">
-							<div class="container">
-								<h2>{{{ item.list_title }}}</h2>
-								<div class="desc">{{{ item.list_content }}}</div>
-								<a href="{{ item.button_url.url }}" class="btn-get-started">{{{ item.button_text }}}</a>
-							</div>
-						</div>
-					<# }); #>
-				<# } #>
-			</div>
-		</section>
+		<div class="title">
+			{{{ settings.title }}}
+		</div>
 		<?php
 	}
 }
-
 $widgets_manager->register( new Medico_Hero() );

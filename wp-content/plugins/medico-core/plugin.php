@@ -1,7 +1,7 @@
 <?php
-namespace ElementorMedico;
+namespace MedicoCore;
 
-use ElementorMedico\PageSettings\Page_Settings;
+use MedicoCore\PageSettings\Page_Settings;
 
 /**
  * Class Plugin
@@ -48,10 +48,8 @@ class Plugin {
 	 * @access public
 	 */
 	public function widget_scripts() {
-		wp_register_script( 'medico', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
+		wp_register_script( 'medico-core', plugins_url( '/assets/js/hello-world.js', __FILE__ ), [ 'jquery' ], false, true );
 	}
-
-	
 
 	/**
 	 * Editor scripts
@@ -65,7 +63,7 @@ class Plugin {
 		add_filter( 'script_loader_tag', [ $this, 'editor_scripts_as_a_module' ], 10, 2 );
 
 		wp_enqueue_script(
-			'medico-editor',
+			'medico-core-editor',
 			plugins_url( '/assets/js/editor/editor.js', __FILE__ ),
 			[
 				'elementor-editor',
@@ -86,7 +84,7 @@ class Plugin {
 	 * @return string
 	 */
 	public function editor_scripts_as_a_module( $tag, $handle ) {
-		if ( 'medico-editor' === $handle ) {
+		if ( 'medico-core-editor' === $handle ) {
 			$tag = str_replace( '<script', '<script type="module"', $tag );
 		}
 
@@ -106,8 +104,9 @@ class Plugin {
 	public function register_widgets( $widgets_manager ) {
 		// Its is now safe to include Widgets files
 		require_once( __DIR__ . '/widgets/hello-world.php' );
+		require_once( __DIR__ . '/widgets/heading.php' );
+		require_once( __DIR__ . '/widgets/feature.php' );
 		require_once( __DIR__ . '/widgets/hero.php' );
-		require_once( __DIR__ . '/widgets/heading.php' );		
 		require_once( __DIR__ . '/widgets/inline-editing.php' );
 
 		// Register Widgets
@@ -128,7 +127,6 @@ class Plugin {
 		new Page_Settings();
 	}
 
-
 	// widget category create 
 	public function medico_add_widget_categories( $medico_add_cat_manager ) {
 		$medico_add_cat_manager->add_category(
@@ -139,6 +137,7 @@ class Plugin {
 			]
 		);
 	}
+
 
 	/**
 	 *  Plugin class constructor

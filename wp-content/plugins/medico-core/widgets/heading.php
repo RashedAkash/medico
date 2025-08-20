@@ -1,5 +1,5 @@
 <?php
-namespace ElementorMedico\Widgets;
+namespace MedicoCore\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -7,7 +7,7 @@ use Elementor\Controls_Manager;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * Medico
+ * Medico Core
  *
  * Elementor widget for hello world.
  *
@@ -38,7 +38,7 @@ class Medico_Heading extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Medico Heading', 'medico' );
+		return __( 'Medico Heading', 'medico-core' );
 	}
 
 	/**
@@ -84,7 +84,7 @@ class Medico_Heading extends Widget_Base {
 	 * @return array Widget scripts dependencies.
 	 */
 	public function get_script_depends() {
-		return [ 'medico' ];
+		return [ 'medico-core' ];
 	}
 
 	/**
@@ -100,36 +100,41 @@ class Medico_Heading extends Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Content', 'medico' ),
+				'label' => __( 'Content', 'medico-core' ),
 			]
 		);
 
-		  $this->add_control(
-            'title',
-            [
-                'label' => esc_html__( 'Title', 'medico' ),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi', 'medico' ),
-                'label_block' => true,
-            ]
-        );
-
-		  $this->add_control(
-            'content',
-            [
-                'label' => esc_html__( 'Content', 'medico' ),
-                'type' => Controls_Manager::TEXTAREA,
-                'default' => esc_html__( 'Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi', 'medico' ),
-                'label_block' => true,
-            ]
-        );
+		$this->add_control(
+			'title',
+			[
+				'label' => esc_html__( 'Title', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'default' => esc_html__( 'Default title', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
+				
+			]
+		);
+		$this->add_control(
+			'content',
+			[
+				'label' => esc_html__( 'Content', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'default' => esc_html__( 'Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit', 'textdomain' ),
+				'placeholder' => esc_html__( 'Type your title here', 'textdomain' ),
+				
+			]
+		);
 
 		$this->end_controls_section();
+
+
+
+
 
 		$this->start_controls_section(
 			'section_style',
 			[
-				'label' => __( 'Style', 'medico' ),
+				'label' => __( 'Style', 'medico-core' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -137,14 +142,14 @@ class Medico_Heading extends Widget_Base {
 		$this->add_control(
 			'text_transform',
 			[
-				'label' => __( 'Text Transform', 'medico' ),
+				'label' => __( 'Text Transform', 'medico-core' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => '',
 				'options' => [
-					'' => __( 'None', 'medico' ),
-					'uppercase' => __( 'UPPERCASE', 'medico' ),
-					'lowercase' => __( 'lowercase', 'medico' ),
-					'capitalize' => __( 'Capitalize', 'medico' ),
+					'' => __( 'None', 'medico-core' ),
+					'uppercase' => __( 'UPPERCASE', 'medico-core' ),
+					'lowercase' => __( 'lowercase', 'medico-core' ),
+					'capitalize' => __( 'Capitalize', 'medico-core' ),
 				],
 				'selectors' => [
 					'{{WRAPPER}} .title' => 'text-transform: {{VALUE}};',
@@ -166,16 +171,13 @@ class Medico_Heading extends Widget_Base {
 	 */
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-
 		?>
 
-	
-      <!-- Section Title -->
+		 <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2> <?php echo esc_html($settings['title']) ?>  <br></h2>
-        <p><?php echo medico_kses_function($settings['content']) ?></p>
+        <h2><?php echo esc_html($settings['title']); ?><br></h2>
+        <p><?php echo esc_html($settings['content']); ?></p>
       </div><!-- End Section Title -->
-
 		<?php
 	}
 

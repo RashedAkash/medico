@@ -1,5 +1,5 @@
 <?php
-namespace ElementorMedico\PageSettings;
+namespace MedicoCore\PageSettings;
 
 use Elementor\Controls_Manager;
 use Elementor\Core\DocumentTypes\PageBase;
@@ -21,7 +21,7 @@ class Page_Settings {
 	 * Register a panel tab slug, in order to allow adding controls to this tab.
 	 */
 	public function add_panel_tab() {
-		Controls_Manager::add_tab( self::PANEL_TAB, __( 'New Tab', 'medico' ) );
+		Controls_Manager::add_tab( self::PANEL_TAB, __( 'New Tab', 'medico-core' ) );
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Page_Settings {
 		$document->start_controls_section(
 			'new_section',
 			[
-				'label' => __( 'Settings', 'medico' ),
+				'label' => __( 'Settings', 'medico-core' ),
 				'tab' => self::PANEL_TAB,
 			]
 		);
@@ -47,9 +47,9 @@ class Page_Settings {
 		$document->add_control(
 			'text',
 			[
-				'label' => __( 'Title', 'medico' ),
+				'label' => __( 'Title', 'medico-core' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Title', 'medico' ),
+				'default' => __( 'Title', 'medico-core' ),
 			]
 		);
 

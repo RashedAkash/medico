@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name: Medico
+ * Plugin Name: Medico Core
  * Description: Elementor sample plugin.
  * Plugin URI:  https://elementor.com/
  * Version:     1.2.1
- * Author:      Akash
+ * Author:      Author Name
  * Author URI:  https://elementor.com/
- * Text Domain: medico
- * Elementor tested up to: 3.31.2
+ * Text Domain: medico-core
+ * Elementor tested up to: 3.5.0
  * Elementor Pro tested up to: 3.5.0
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 require_once('include/medico-kses.php');
 
 /**
- * Main Medico Class
+ * Main Medico Core Class
  *
  * The init class that runs the Hello World plugin.
  * Intended To make sure that the plugin's minimum requirements are met.
@@ -26,7 +26,7 @@ require_once('include/medico-kses.php');
  * Any custom code should go inside Plugin Class in the plugin.php file.
  * @since 1.2.0
  */
-final class Elementor_Medico {
+final class Medico_Core {
 
 	/**
 	 * Plugin Version
@@ -115,9 +115,9 @@ final class Elementor_Medico {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
-			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'medico' ),
-			'<strong>' . esc_html__( 'Medico', 'medico' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'medico' ) . '</strong>'
+			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'medico-core' ),
+			'<strong>' . esc_html__( 'Medico Core', 'medico-core' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'medico-core' ) . '</strong>'
 		);
 
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -138,9 +138,9 @@ final class Elementor_Medico {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'medico' ),
-			'<strong>' . esc_html__( 'Medico', 'medico' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'medico' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'medico-core' ),
+			'<strong>' . esc_html__( 'Medico Core', 'medico-core' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'medico-core' ) . '</strong>',
 			self::MINIMUM_ELEMENTOR_VERSION
 		);
 
@@ -162,9 +162,9 @@ final class Elementor_Medico {
 
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'medico' ),
-			'<strong>' . esc_html__( 'Medico', 'medico' ) . '</strong>',
-			'<strong>' . esc_html__( 'PHP', 'medico' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'medico-core' ),
+			'<strong>' . esc_html__( 'Medico Core', 'medico-core' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'medico-core' ) . '</strong>',
 			self::MINIMUM_PHP_VERSION
 		);
 
@@ -172,5 +172,5 @@ final class Elementor_Medico {
 	}
 }
 
-// Instantiate Elementor_Medico.
-new Elementor_Medico();
+// Instantiate Medico_Core.
+new Medico_Core();

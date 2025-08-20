@@ -1,5 +1,5 @@
 <?php
-namespace ElementorMedico\Widgets;
+namespace MedicoCore\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -34,7 +34,7 @@ class Inline_Editing extends Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return __( 'Inline Editing', 'medico' );
+		return __( 'Inline Editing', 'medico-core' );
 	}
 
 	/**
@@ -81,34 +81,34 @@ class Inline_Editing extends Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Content', 'medico' ),
+				'label' => __( 'Content', 'medico-core' ),
 			]
 		);
 
 		$this->add_control(
 			'title',
 			[
-				'label' => __( 'Title', 'medico' ),
+				'label' => __( 'Title', 'medico-core' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => __( 'Title', 'medico' ),
+				'default' => __( 'Title', 'medico-core' ),
 			]
 		);
 
 		$this->add_control(
 			'description',
 			[
-				'label' => __( 'Description', 'medico' ),
+				'label' => __( 'Description', 'medico-core' ),
 				'type' => Controls_Manager::TEXTAREA,
-				'default' => __( 'Description', 'medico' ),
+				'default' => __( 'Description', 'medico-core' ),
 			]
 		);
 
 		$this->add_control(
 			'content',
 			[
-				'label' => __( 'Content', 'medico' ),
+				'label' => __( 'Content', 'medico-core' ),
 				'type' => Controls_Manager::WYSIWYG,
-				'default' => __( 'Content', 'medico' ),
+				'default' => __( 'Content', 'medico-core' ),
 			]
 		);
 
